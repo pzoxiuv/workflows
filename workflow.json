@@ -2,12 +2,14 @@
 	{
 		"id": 1,
 		"script": "/home/alex/orch/scripts/script1.sh",
-		"arg_string": "\"hello world!\""
+		"arg_string": "2",
+		"outputs": ["orig", "oneplus"]
 	},
 	{
 		"id": 2,
 		"script": "/home/alex/orch/scripts/pyscript.py",
-		"arg_string": "one two"
+		"arg_string": "",
+		"outputs": []
 	}
 ]
 }
