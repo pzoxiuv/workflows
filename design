@@ -1,0 +1,24 @@
+Each block in the workflow has the following info:
+
+- ID
+- Script to call
+- Argument string (built with previous outputs)
+- Number of expected outputs (and optional names of outputs, default to arg1, ...)
+- (Optional) Regex for seperating output into variables (default to space)
+- (Optional) file to send output to
+- (Optional) file to send stderr to
+- (Optional) Expected return code (default to zero)
+	- Should be able to indicate nonzero OK (i.e. for grep)
+
+* Can reuse output names, but then the old value is overwritten
+* Should check return code, error if bad
+* Need some way of representing connections between blocks
+	- Maybe have two files, one of block definitions and one of connections?
+	- Default connection would be "unconditional goto"
+	- Optional conditionals for more filtering
+	- E.g. if you connected block 1 and 2, then 1 again the block definiton file would just have defs for blocks 1 and 2. Then the connection file would have the program order"1 unconditionally goes to 2, 2 unconditionally goes to 1"
+
+Connection file:
+Would call block 1 if true, then block 2 if true.
+
+How to handle nested conditions? E.g. if x>2 do 2, then if y>3 do 3
