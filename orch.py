@@ -15,24 +15,24 @@ def add_block(outfile, block, num_tabs):
 	args = shlex.split(block['arg_string'])
 	args.insert(0, block['script'])
 	#print(args)
-	
+
 	tabs= "\t"	# Starts with at least one tab because they're called from a method, newline for readability
 	for x in range(0, num_tabs):
 		tabs += "\t"
 
-	subproc_str = "\n" +tabs + "output = subprocess.check_output(["
+	subproc_str = "\n" +tabs + "_output = subprocess.check_output(["
 	for arg in args:
 		subproc_str += "\"" + arg + "\", "
 	subproc_str = subproc_str[:-2]	# Remove trailing comma and space
 	subproc_str += "])\n"
 	outfile.write(subproc_str)
 
-	outfile.write(tabs + "print(output)\n")
+	outfile.write(tabs + "print(_output)\n")
 
-	outfile.write(tabs + "split_output = output.split(\" \")\n")
+	outfile.write(tabs + "_split_output = _output.split(\" \")\n")
 	output_num = 0
 	for output in block['outputs']:
-		outfile.write(tabs + output + " = split_output[" + str(output_num) + "]\n")
+		outfile.write(tabs + output + " = _split_output[" + str(output_num) + "]\n")
 		output_num += 1
 
 def add_cond(outfile, cond, num_tabs):
